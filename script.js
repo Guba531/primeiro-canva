@@ -31,3 +31,36 @@ ctx.arc(80, 30, 20, 0, Math.PI * 2);
 // Fecha o caminho (opcional para círculos completos, mas boa prática).
 ctx.closePath();
 ctx.fill();
+
+// Vamos fazer um LOSANGO (diamante)! 💎
+ctx.fillStyle = 'purple';
+ctx.beginPath();
+ctx.moveTo(200, 10); // X=200, Y=10 (topo)
+ctx.lineTo(220, 30);
+ctx.lineTo(200, 50);
+ctx.lineTo(180, 30);
+ctx.closePath();
+ctx.fill();
+
+// Uma ESTRELA! ⭐
+ctx.fillStyle = 'gold';
+ctx.beginPath();
+ctx.moveTo(260, 15);
+ctx.lineTo(265, 25);
+ctx.lineTo(275, 25);
+ctx.lineTo(268, 32);
+ctx.lineTo(270, 42);
+ctx.lineTo(260, 37);
+ctx.lineTo(250, 42);
+ctx.lineTo(252, 32);
+ctx.lineTo(245, 25);
+ctx.lineTo(255, 25);
+ctx.closePath();
+ctx.fill();
+
+//Borda
+ctx.strokeStyle = 'black';
+ctx.lineWidth = 3;
+ctx.beginPath();
+ctx.arc(30, 100, 18, 0, Math.PI * 2);
+ctx.strokeStyle();
