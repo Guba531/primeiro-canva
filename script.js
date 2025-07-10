@@ -63,4 +63,26 @@ ctx.strokeStyle = 'black';
 ctx.lineWidth = 3;
 ctx.beginPath();
 ctx.arc(30, 100, 18, 0, Math.PI * 2);
-ctx.strokeStyle();
+ctx.stroke();
+
+ctx.fillStyle = 'green';
+
+ctx.fillRect(70, 80, 40, 20);
+
+// TRIANGULO LEGAL 👌
+ctx.fillStyle = 'yellow';
+ctx.beginPath();
+ctx.moveTo(130, 10);
+ctx.lineTo(150, 50);
+ctx.lineTo(110, 50);
+ctx.closePath();
+ctx.fill();
+
+//TRIANGULO DO MAL 🩻
+ctx.fillStyle = 'lime';
+ctx.beginPath();
+ctx.moveTo(170, 50);
+ctx.lineTo(110, 50);
+ctx.lineTo(140, 100);
+ctx.closePath();
+ctx.fill();
