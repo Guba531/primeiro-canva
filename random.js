@@ -51,95 +51,55 @@ function drawVRectangle(ctx, x, y, size, color) {
 }
 
 function drawDiamond(ctx, x, y, size, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(x, y - size / 2);
-    ctx.lineTo(x + size / 2, y);
-    ctx.lineTo(x, y + size / 2);
-    ctx.lineTo(x - size / 2, y);
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawStar(ctx, y, x, size, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    const outerRadius = size / 2;
-    const innerRadius = outerRadius / 2.5;
-    const numPoints = 5;
-
-    for (let i = 0; i < numPoints; i++) {
-        const outerAngle = (i * 2 * Math.PI / numPoints) - (Math.PI / 2);
-        const innerAngle = outerAngle + (Math.PI / numPoints);
-
-        ctx.lineTo(x + outerRadius * Math.cos(outerAngle), y + outerRadius * Math.sin(outerAngle));
-        ctx.lineTo(x + innerRadius * Math.cos(innerAngle), y + innerRadius * Math.sin(innerAngle));
-    }
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawHexagon(ctx, x, y, size, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    const angle = Math.PI * 2 / 6;
-    for (let i = 0; i < 6; i++) {
-        ctx.lineTo(x + size / 2 * Math.cos(angle * i), y + size / 2 * Math.sin(angle * i));
-    }  
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawSpiral(ctx, x, y, loops, points, color) {
-    ctx.beginPath();
-    for (let i = 0; i < points; i++) {
-        let angle = (i / points) * loops * 2 * Math.PI;
-        let radius = i * 2;
-        let px = x + Math.cos(angle) * radius;
-        let py = y + Math.sin(angle) * radius;
-        ctx.lineTo(px, py);
-    }
-    ctx.strokeStyle = color;
-    ctx.stroke();
-}
-
-function drawFlower(ctx, x, y, radius, petals, color) {
-    for (let i = 0 ; i < petals; i++) {
-        let angle = (i * 2 * Math.PI) / petals;
-        let cx = x + Math.cos(angle) * radius;
-        let cy = y + Math.cos(angle) * radius;
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius / 3, 0, 2 * Math.PI);
-        ctx.fillStyle = color;
-        ctx.fill();
-    }
+    ctx.fillStyle = color; // Define a cor para o losango
+    ctx.beginPath(); // Começa um novo caminho
+    // Desenha as quatro pontas do losango (diamante), centralizada em (x,y).
+    ctx.moveTo(x, y - size / 2); // Ponta de cima
+    ctx.lineTo(x + size / 2, y); // Ponta da direita
+    ctx.lineTo(x, y + size / 2); //Ponta de baixo
+    ctx.lineTo(x - size / 2, y); // Ponta da esquerda
+    ctx.closePath(); // Fecha o losango
+    ctx.fill(); // Preenche o losango
 }
 
 const colors = ['violet', 'blue', 'green', 'red', 'orange', 'cyan', 'silver', 'gold', 'lime', 'brown'];
 
 function getRandomItem(arr) {
     const randomIndex = Math.floor(Math.random() * arr.length);
-    return arr[randomIndex];
+    return arr [randomIndex];
 }
 
 const drawFunctions = [
-    //drawSquare,
-    //drawCircle,
-    //drawTriangle,
-    //drawDiamond,
-    drawStar,
-    //drawRectangle,
-    //drawInvertedTriangle,
-    drawHexagon,
-    drawSpiral,
-    drawFlower,
+    drawSquare,
+    drawCircle,
+    drawTriangle,
+    drawDiamond,
+    //drawStar,
+    drawRectangle,
+    //drawInvertedTriangle
 ]
 
-clearButton.addEventListener('click', function () {
+// --- Funcionalidade do Botão Limpar ---
+// Vamos ensinar o botão 'Limpar' a fazer algo quando clicado.
+// Adicionar um "ouvinte de evento" (event listener) ao botão.
+// É como dizer: "Botão, preste atenção! Quando alguém 'clicar' em você,
+// execute a função que vou te dar agora."
+clearButton.addEventListener('click', function() {
+// Esta função será executada SOMENTE quando o botão for clicado.
+    // Limpar o conteúdo do canvas.
+    // ctx.clearRect(x, y, width, height)
+    // Limpa uma área retangular. Para limpar TUDO, usamos:
+    // (0, 0): Começa a limpar do canto superior esquerdo.
+    // canvas.width, canvas.height: Limpa até o final da largura e altura do canvas.
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     console.log('Canvas limpo!');
 });
 
+// --- NOVO: Adicionando o Event Listener no canvas para cliques! ---
+// Agora, vamos fazer o nosso canvas "escutar" quando alguém clica nele.
+// canvas.addEventListener('click', function(event) { ... });
+// Isso significa: "Canvas, preste atenção! Quando acontecer um 'click' em você,
+// execute a função que está aqui dentro, e me dê informações sobre o 'evento' (o clique)."
 canvas.addEventListener('click', function (event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
