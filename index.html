@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Minha Prancheta Magica</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Prancheta Magica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-layout-wrapper">
         <!--
     Vamos criar um container para segurar a imagem de fundo
     e posicionar o canvas sobre ela.
     Isso é útil para controlar o fundo separadamente do canvas.
     -->
-    <div class="prancheta-container">
-        <canvas id="myCanvas" width="400" height="250"></canvas>
-    </div>
-    <!--
+        <div class="prancheta-container">
+            <canvas id="myCanvas"></canvas>
+        </div>
+
+        <div class="shapes-toolbar">
+           <button class="shape-btn" data-shape="square" title="Quadrado">■</button>
+           <button class="shape-btn" data-shape="circle" title="Circulo">●</button>
+           <button class="shape-btn" data-shape="triangle" title="Triangulo">▲</button>
+           <button class="shape-btn" data-shape="diamond" title="Losango">◆</button>
+           <button class="shape-btn" data-shape="star" title="Estrela">★</button>
+           <button class="shape-btn" data-shape="rectangle" title="Retangulo">▭</button><button class="shape-btn" data-shape="square" title="Quadrado">■</button>
+           <button class="shape-btn" data-shape="invertedTriangle" title="Triangulo Invertido">▼</button>
+           <button class="shape-btn" data-shape="hexagon" title="Hexagono">⬡</button>
+        </div>
+        <!--
         Um botão simples para limpar o conteúdo do canvas.
         Vamos adicionar um 'id' para poder pegar ele no JavaScript.
         -->
@@ -26,6 +40,7 @@
     (canvas e botão) já existam quando o script tentar acessá-los.
     O atributo 'defer' também ajuda nisso, dizendo para o navegador
     esperar o HTML ser completamente carregado antes de executar o script.-->
-    <script src="script.js" defer></script>
-    </body>
+        <script src="script.js" defer></script>
+</body>
+
 </html>
