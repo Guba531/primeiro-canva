@@ -1,14 +1,17 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 const clearButton = document.getElementById('clearButton');
-const shapeBtns = document.querySelectorAll('.shape-btn');
+const shapeBtns = document.querySelectorAll('.shape-btn')// MODIFICADO: Agora pegamos todos os botões de forma para poder "ouvir" quando você clica neles.
 
+let selectedShapeType = null;
+
+// MODIFICADO: Isso é muito importante! Fazemos o tamanho real da área de desenho do canvas
+// ser igual ao tamanho que ele aparece na sua tela. Assim, quando você clica,
+// a forma aparece exatamente onde o seu dedo ou mouse está, e não um pouco para o lado!
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
-const colorBtns = document.querySelectorAll('.color-btn')
-let selectedColor = 'red';
-let selectedShapeType = null;
+console.log('Canvas inicializado com dimensões:', canvas.width, 'x', canvas.height);
 
 function drawSquare(ctx, x, y, size, color) {
     ctx.fillStyle = color;
@@ -48,14 +51,15 @@ function drawVRectangle(ctx, x, y, size, color) {
 }
 
 function drawDiamond(ctx, x, y, size, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(x, y - size / 2);
-    ctx.lineTo(x + size / 2, y);
-    ctx.lineTo(x, y + size / 2);
-    ctx.lineTo(x - size / 2, y);
-    ctx.closePath();
-    ctx.fill();
+    ctx.fillStyle = color; // Define a cor para o losango
+    ctx.beginPath(); // Começa um novo caminho
+    // Desenha as quatro pontas do losango (diamante), centralizada em (x,y).
+    ctx.moveTo(x, y - size / 2); // Ponta de cima
+    ctx.lineTo(x + size / 2, y); // Ponta da direita
+    ctx.lineTo(x, y + size / 2); //Ponta de baixo
+    ctx.lineTo(x - size / 2, y); // Ponta da esquerda
+    ctx.closePath(); // Fecha o losango
+    ctx.fill(); // Preenche o losango
 }
 
 function drawReverseTriangle(ctx, x, y, size, color) {
@@ -108,6 +112,13 @@ const shapeDrawMap = {
     'Hexagon': drawHexagon,
 };
 
+const colors = ['violet', 'blue', 'green', 'red', 'orange', 'cyan', 'silver', 'gold', 'lime', 'brown'];
+
+function getRandomItem(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+}
+
 clearButton.addEventListener('click', function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     console.log('Canvas limpo!');
@@ -123,27 +134,17 @@ shapeBtns.forEach(button => {
     });
 });
 
-colorBtns.forEach(button => {
-    button.addEventListener('click', function () {
-        colorBtns.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        selectedColor = this.dataset.color;
-        console.log(`Cor selecionada: ${selectedColor}`);
-    });
-});
-
-colorBtns[0].classList.add('active');
-
-
-canvas.addEventListener('click', function (event) {
+canvas.addEventListener('click', function(event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
+    console.log(`Você clicou em: X=${x}, Y=${y}`);
+    const randomColor = getRandomItem(colors);
     const shapeSize = 30;
 
     if (selectedShapeType && shapeDrawMap[selectedShapeType]) {
         const drawFunction = shapeDrawMap[selectedShapeType];
-        drawFunction(ctx, x, y, shapeSize, selectedColor);
+        drawFunction(ctx, x, y, shapeSize, randomColor);
 } else {
     console.log('Nenhuma forma selecionada. Clique em um botão de forma primeiro.');
 }

@@ -65,7 +65,7 @@ body {
     /* Ajuste as posições e dimensões conforme a área branca da sua imagem */
     top: 27%;
     left: 25.1%;
-    width: auto;
+    width: 50%;
     height:50%;
     border: 1px solid #ccc; /* Uma borda leve pra gente ver onde o canvas está */
     background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
@@ -180,4 +180,31 @@ Onde: */
     background: #007bff;
     color: #fff;
     border-color: #0056b3;
+}
+
+.colors-toolbar {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 10px;
+    background: #fff3e0;
+    padding: 10px 9px;
+    border-radius: 7px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    justify-content: center;
+}
+
+.color-btn {
+    width: 28px;
+    height: 28px;
+    border: 2px solid #888;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border 0.2s, transform 0.2s;
+    outline: none;
+    box-shadow: 0 0 2px #0002;
+}
+
+.color-btn.activex, .color-btn:focus {
+    border: 3.5px solid #000;
+    transform: scale(1.2);
 }
